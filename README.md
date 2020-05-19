@@ -1,2 +1,2 @@
 # AcousticBrainz-UI
-AcousticBrainz Database User Interface
+Perl Mojolicious AcousticBrainz Database User Interface
