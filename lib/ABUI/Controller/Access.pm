@@ -278,10 +278,13 @@ sub _compute_averages {
   );
 
   my %avg;
+  my %seen;
 
   while (my $recording = $recs->next) {
     my $content = read_text($self->config('base') . $recording->file);
     my $raw = decode_json($content);
+
+    next unless $seen{ $raw->{metadata}{tags}{musicbrainz_recordingid}[0] }++;
 
     my $track_name = $raw->{metadata}{tags}{file_name};
     next unless $track_name =~ /\.mp3$/; # Only consider MP3 files
