@@ -1,7 +1,7 @@
 package ABUI::Controller::Access;
 use Mojo::Base 'Mojolicious::Controller';
 
-use Data::Dumper;
+use Data::Dumper::Compact 'ddc';
 use lib $ENV{HOME} . '/sandbox/Data-Science-FromScratch/lib';
 use Data::MachineLearning::Elements;
 use File::Slurper 'read_text';
@@ -50,7 +50,7 @@ sub main {
   if ($file) {
     my $content = read_text($file);
     my $raw = decode_json($content);
-    return $self->render(text => Dumper($raw->{metadata}));
+    return $self->render(text => ddc($raw->{metadata}));
   }
   elsif ($artist1 && !$genre && !$average && !$all && !$artist2 && !$artist3) {
     if ($track) {
