@@ -17,7 +17,9 @@ sub size {
   my $artists = $self->rs('Artist')->count;
   my $recordings = $self->rs('Recording')->count;
 
-  $self->render(json => { artists => $artists, recordings => $recordings });
+  my $db_size = -s $self->config('db');
+
+  $self->render(json => { artists => $artists, recordings => $recordings, db => $db_size });
 }
 
 sub main {
