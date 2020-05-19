@@ -1,5 +1,6 @@
 package ABUI::Controller::Access;
 use Mojo::Base 'Mojolicious::Controller';
+use Mojo::Util 'url_unescape';
 
 use lib $ENV{HOME} . '/sandbox/Data-Science-FromScratch/lib';
 use Data::MachineLearning::Elements;
@@ -22,14 +23,14 @@ sub size {
 sub main {
   my $self = shift;
 
-  my $artist1 = $self->param('artist1');
-  my $artist2 = $self->param('artist2');
-  my $artist3 = $self->param('artist3');
-  my $track = $self->param('track');
+  my $artist1 = url_unescape $self->param('artist1');
+  my $artist2 = url_unescape $self->param('artist2');
+  my $artist3 = url_unescape $self->param('artist3');
+  my $track = url_unescape $self->param('track');
   my $genre = $self->param('genre');
   my $average = $self->param('average');
   my $all = $self->param('all');
-  my $file = $self->param('file');
+  my $file = url_unescape $self->param('file');
 
   my $genres;
   my $artists;
