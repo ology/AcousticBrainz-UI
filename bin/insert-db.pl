@@ -15,7 +15,7 @@ my $path = shift || $base . 'acousticbrainz-lowlevel-json-20150129/lowlevel';
 print "Gathering files...\n";
 my @files = File::Find::Rule->file()->name('*.json')->in($path);
 
-my $schema = Schema->connect('dbi:SQLite:dbname=ab-low-level.db', '', '');
+my $schema = Schema->connect('dbi:SQLite:dbname=/home/gene/Data/ab-low-level.db', '', '');
 
 my %name_ids;
 
