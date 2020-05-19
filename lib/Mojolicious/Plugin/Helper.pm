@@ -26,7 +26,8 @@ sub register {
 
   $app->helper(url_encode => sub {
     my $self = shift;
-    return url_escape(@_)
+    my $str = shift;
+    return url_escape($str, '&')
   });
 }
 
