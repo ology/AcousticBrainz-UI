@@ -12,7 +12,7 @@ sub register {
   my $config = $app->config;
 
   $app->helper(schema => sub {
-    return state $dbi_connection = Schema->connect('dbi:SQLite:dbname=/home/gene/sandbox/dev/Music/ab-low-level.db','','');
+    return state $dbi_connection = Schema->connect('dbi:SQLite:dbname=' . $config->{db},'','');
   });
 
   $app->helper(rs => sub {
