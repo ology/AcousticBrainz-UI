@@ -1,0 +1,127 @@
+% layout 'default';
+% title 'AcousticBrainz User Interface';
+
+<b><a href="/"><%= title %></a></b> -
+Searching <%= $total_artists %> artists and <%= $total_recordings %> recordings
+<p></p>
+
+<div>
+    <form name="myform" method="get">
+        <label for="artist1">Artist 1:</label>
+        <input type="text" name="artist1" id="artist1" value="<%= $artist1 %>" placeholder="Exact or partial" />
+        <label for="artist2">Artist 2:</label>
+        <input type="text" name="artist2" id="artist2" value="<%= $artist2 %>" placeholder="Similar" />
+        <label for="artist3">Artist 3:</label>
+        <input type="text" name="artist3" id="artist3" value="<%= $artist3 %>" placeholder="Not similar" />
+        <br>
+        <label for="track">Track:</label>
+        <input type="text" name="track" id="track" value="<%= $track %>" placeholder="Partial name" />
+        <label for="genre">Genre:</label>
+        <input type="checkbox" name="genre" id="genre"
+% if ($genre) {
+            checked="checked"
+% }
+        />
+        <label for="average">Average:</label>
+        <input type="checkbox" name="average" id="average"
+% if ($average) {
+            checked="checked"
+% }
+        />
+        <label for="all">All:</label>
+        <input type="checkbox" name="all" id="all"
+% if ($all) {
+            checked="checked"
+% }
+        />
+        <input type="submit" value="Submit" />
+        <input type="reset" value="Clear" />
+    </form>
+</div>
+
+% if ($genres) {
+<div>
+    <ol>
+    % for my $genre (@$genres) {
+        <li><%= $genre %></li>
+    % }
+    </ol>
+</div>
+% }
+% elsif ($artists && !$tracks && !$averages) {
+<div>
+    <ol>
+    % while (my $artist = $artists->next) {
+        <li>
+            <a href="/?artist1=<%= fix_latin($artist->name) %>&all=1"><%= fix_latin($artist->name) %></a>
+            -
+            <a href="https://musicbrainz.org/artist/<%= $artist->mbid %>"><%= $artist->mbid %></a>
+        </li>
+    % }
+    </ol>
+</div>
+% }
+% elsif ($tracks) {
+<div>
+    <ol>
+    % for my $t (sort { $a->{name} cmp $b->{name} } @$tracks) {
+        <li><%= $t->{name} %> - <a href="https://musicbrainz.org/recording/<%= $t->{mbid} %>"><%= $t->{mbid} %></a></li>
+    % }
+    </ol>
+</div>
+% }
+% elsif ($averages) {
+<div>
+    <ol>
+    % for my $feature (sort keys %$averages) {
+        <li><%= $feature %> = <%= $averages->{$feature} %></li>
+    % }
+    </ol>
+</div>
+% }
+% elsif ($diffs) {
+<div>
+    <ol>
+    % for my $feature (sort keys %$diffs) {
+        <li><%= $feature %> = <%= $diffs->{$feature} %></li>
+    % }
+    </ol>
+    <p>Correct: <%= $correct %> / <%= scalar keys %$diffs %> = <%= $correct / scalar(keys %$diffs) %></p>
+</div>
+% }
+% elsif ($recordings) {
+<div>
+    <ol>
+    % for my $recording (sort { $a->{name} cmp $b->{name} } @$recordings) {
+        <li><%= $recording->{name} %> - <a href="https://musicbrainz.org/recording/<%= $recording->{mbid} %>"><%= $recording->{mbid} %></a></li>
+    % }
+    </ol>
+</div>
+% }
+% elsif ($members) {
+<div>
+    % for my $member (sort keys %$members) {
+        <p>
+        % if ($member eq 'Shared') {
+        <b><%= $member %></b>
+        (<%= $intersection %> / <%= $union %> = <%= sprintf '%.2f', $intersection / $union %>):
+        % }
+        % else {
+        <%= $member %>:
+        % }
+        <%= join ', ', @{ $members->{$member} } %></p>
+    % }
+</div>
+% }
+
+<script>
+jQuery(function($) { // onDomReady
+    // reset handler that clears the form
+    $('form[name="myform"] input:reset').click(function () {
+        $('form[name="myform"]')
+            .find(':radio, :checkbox').removeAttr('checked').end()
+            .find('textarea, :text, select').val('')
+        return false;
+    });
+});
+</script>
