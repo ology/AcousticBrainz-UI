@@ -39,7 +39,10 @@ Searching <%= $total_artists %> artists and <%= $total_recordings %> recordings
     </form>
 </div>
 
-% if ($genres) {
+% if ($metadata) {
+%= dumper $metadata
+% }
+% elsif ($genres) {
 <div>
     <ol>
     % for my $genre (@$genres) {
