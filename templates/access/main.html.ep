@@ -69,7 +69,7 @@ Searching <%= $total_artists %> artists and <%= $total_recordings %> recordings
     <ol>
     % for my $t (sort { $a->{name} cmp $b->{name} } @$tracks) {
         <li>
-        <a href="/?file=<%= $t->{file} %>"><%= $t->{name} %></a>
+        <a href="/?artist1=<%= fix_latin($artist1) %>&file=<%= $t->{file} %>"><%= $t->{name} %></a>
         (<a href="https://musicbrainz.org/recording/<%= $t->{mbid} %>"><%= $t->{mbid} %></a>)
         </li>
     % }
@@ -100,7 +100,7 @@ Searching <%= $total_artists %> artists and <%= $total_recordings %> recordings
     <ol>
     % for my $recording (sort { $a->{name} cmp $b->{name} } @$recordings) {
         <li>
-        <a href="/?file=<%= $recording->{file} %>"><%= $recording->{name} %></a>
+        <a href="/?artist1=<%= fix_latin($artist1) %>&file=<%= $recording->{file} %>"><%= $recording->{name} %></a>
         (<a href="https://musicbrainz.org/recording/<%= $recording->{mbid} %>"><%= $recording->{mbid} %></a>)
         </li>
     % }
