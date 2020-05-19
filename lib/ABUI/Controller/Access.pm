@@ -23,9 +23,9 @@ sub size {
 sub main {
   my $self = shift;
 
-  my $artist1 = url_unescape $self->param('artist1');
-  my $artist2 = url_unescape $self->param('artist2');
-  my $artist3 = url_unescape $self->param('artist3');
+  my $artist1 = $self->param('artist1');
+  my $artist2 = $self->param('artist2');
+  my $artist3 = $self->param('artist3');
   my $track = url_unescape $self->param('track');
   my $genre = $self->param('genre');
   my $average = $self->param('average');
