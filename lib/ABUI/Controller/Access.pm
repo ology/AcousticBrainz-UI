@@ -1,7 +1,6 @@
 package ABUI::Controller::Access;
 use Mojo::Base 'Mojolicious::Controller';
 
-use Data::Dumper::Compact 'ddc';
 use lib $ENV{HOME} . '/sandbox/Data-Science-FromScratch/lib';
 use Data::MachineLearning::Elements;
 use File::Slurper 'read_text';
@@ -39,6 +38,7 @@ sub main {
   my $diffs;
   my $recordings;
   my $members;
+  my $metadata;
 
   my $correct = 0;
   my $union = 0;
@@ -50,7 +50,7 @@ sub main {
   if ($file) {
     my $content = read_text($file);
     my $raw = decode_json($content);
-    return $self->render(text => ddc($raw->{metadata}));
+    $metadata = $raw->{metadata};
   }
   elsif ($artist1 && !$genre && !$average && !$all && !$artist2 && !$artist3) {
     if ($track) {
@@ -241,6 +241,7 @@ sub main {
   }
 
   $self->render(
+    metadata         => $metadata,
     artist1          => $artist1,
     artist2          => $artist2,
     artist3          => $artist3,
