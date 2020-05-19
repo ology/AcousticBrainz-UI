@@ -39,8 +39,9 @@ Searching <%= $total_artists %> artists and <%= $total_recordings %> recordings
     </form>
 </div>
 
+<p></p>
+
 % if ($metadata) {
-%= tag 'p'
 %= dumper $metadata
 % }
 % elsif ($genres) {
