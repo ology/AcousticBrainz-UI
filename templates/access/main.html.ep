@@ -15,9 +15,9 @@ Searching <%= $total_artists %> artists and <%= $total_recordings %> recordings
         <input type="text" name="artist2" id="artist2" value="<%= $artist2 %>" placeholder="Similar" />
         <label for="artist3">Artist 3:</label>
         <input type="text" name="artist3" id="artist3" value="<%= $artist3 %>" placeholder="Not similar" />
+        <br>
         <label for="track">Track:</label>
         <input type="text" name="track" id="track" value="<%= $track %>" placeholder="Partial name" />
-        </div>
         <label class="form-check-label" for="genre">Genre:</label>
         <input type="checkbox" name="genre" id="genre"
 % if ($genre) {
