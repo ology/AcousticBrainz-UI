@@ -1,6 +1,7 @@
 package Mojolicious::Plugin::Helper;
 use Mojo::Base 'Mojolicious::Plugin';
 
+use Mojo::Util 'url_escape';
 use Encoding::FixLatin 'fix_latin';
 
 use Schema;
@@ -21,6 +22,11 @@ sub register {
   $app->helper(fix_latin => sub {
     my $self = shift;
     return scalar fix_latin(@_)
+  });
+
+  $app->helper(url_encode => sub {
+    my $self = shift;
+    return url_escape(@_)
   });
 }
 
