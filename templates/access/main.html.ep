@@ -10,7 +10,7 @@ Searching <%= $total_artists %> artists and <%= $total_recordings %> recordings
 <div>
     <form name="myform" method="get">
         <label for="artist1">Artist 1:</label>
-        <input type="text" name="artist1" id="artist1" value="<%= $artist1 %>" placeholder="Exact or partial" />
+        <input type="text" name="artist1" id="artist1" value="<%= $artist1 %>" placeholder="Name" />
         <label for="artist2">Artist 2:</label>
         <input type="text" name="artist2" id="artist2" value="<%= $artist2 %>" placeholder="Similar" />
         <label for="artist3">Artist 3:</label>
