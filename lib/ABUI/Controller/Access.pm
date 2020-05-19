@@ -10,8 +10,6 @@ use JSON::MaybeXS;
 use Set::Tiny;
 use Statistics::Lite 'mean';
 
-use constant BASE => '/home/guest/tmp/acousticbrainz/';
-
 sub size {
   my $self = shift;
 
@@ -53,7 +51,7 @@ sub main {
       my $recs = $artist->recordings;
 
       while (my $recording = $recs->next) {
-        my $file = BASE . $recording->file;
+        my $file = $self->config('base') . $recording->file;
         my $content = read_text($file);
         my $raw = decode_json($content);
 
@@ -77,7 +75,7 @@ sub main {
     my $recs = $artist->recordings;
 
     while (my $recording = $recs->next) {
-      my $file = BASE . $recording->file;
+      my $file = $self->config('base') . $recording->file;
       my $content = read_text($file);
       my $raw = decode_json($content);
 
@@ -275,7 +273,7 @@ sub _compute_averages {
   my %avg;
 
   while (my $recording = $recs->next) {
-    my $content = read_text(BASE . $recording->file);
+    my $content = read_text($self->config('base') . $recording->file);
     my $raw = decode_json($content);
 
     my $track_name = $raw->{metadata}{tags}{file_name};
