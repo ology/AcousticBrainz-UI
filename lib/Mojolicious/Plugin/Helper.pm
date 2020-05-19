@@ -23,11 +23,6 @@ sub register {
     my $self = shift;
     return scalar fix_latin(@_)
   });
-
-  $app->helper(url_encode => sub {
-    my $self = shift;
-    return url_escape(@_)
-  });
 }
 
 1;
