@@ -36,8 +36,8 @@ Searching <%= $total_artists %> artists and <%= $total_recordings %> recordings
             checked="checked"
 % }
         />
-        <input type="submit" value="Submit" />
-        <input type="reset" value="Clear" />
+        <input type="submit" class="btn btn-primary" value="Submit" />
+        <input type="reset" class="btn btn-secondary" value="Clear" />
     </form>
 </div>
 
