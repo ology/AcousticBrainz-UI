@@ -54,8 +54,7 @@ Searching <%= $total_artists %> artists and <%= $total_recordings %> recordings
     % while (my $artist = $artists->next) {
         <li>
             <a href="/?artist1=<%= fix_latin($artist->name) %>&all=1"><%= fix_latin($artist->name) %></a>
-            -
-            <a href="https://musicbrainz.org/artist/<%= $artist->mbid %>"><%= $artist->mbid %></a>
+            (<a href="https://musicbrainz.org/artist/<%= $artist->mbid %>"><%= $artist->mbid %></a>)
         </li>
     % }
     </ol>
@@ -67,8 +66,7 @@ Searching <%= $total_artists %> artists and <%= $total_recordings %> recordings
     % for my $t (sort { $a->{name} cmp $b->{name} } @$tracks) {
         <li>
         <a href="/?file=<%= $t->{file} %>"><%= $t->{name} %></a>
-        -
-        <a href="https://musicbrainz.org/recording/<%= $t->{mbid} %>"><%= $t->{mbid} %></a>
+        (<a href="https://musicbrainz.org/recording/<%= $t->{mbid} %>"><%= $t->{mbid} %></a>)
         </li>
     % }
     </ol>
@@ -99,8 +97,7 @@ Searching <%= $total_artists %> artists and <%= $total_recordings %> recordings
     % for my $recording (sort { $a->{name} cmp $b->{name} } @$recordings) {
         <li>
         <a href="/?file=<%= $recording->{file} %>"><%= $recording->{name} %></a>
-        -
-        <a href="https://musicbrainz.org/recording/<%= $recording->{mbid} %>"><%= $recording->{mbid} %></a>
+        (<a href="https://musicbrainz.org/recording/<%= $recording->{mbid} %>"><%= $recording->{mbid} %></a>)
         </li>
     % }
     </ol>
