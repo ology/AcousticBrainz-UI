@@ -63,7 +63,7 @@ sub main {
         if ($raw->{metadata}{tags}{file_name} =~ /$track/i) {
           push @$tracks, {
             name => scalar fix_latin($raw->{metadata}{tags}{file_name}),
-            file => $recording->file,
+            file => $self->config('base') . $recording->file,
             mbid => $raw->{metadata}{tags}{musicbrainz_recordingid}[0],
           };
         }
@@ -84,7 +84,7 @@ sub main {
       my $raw = $recording->json($self->config('base'));
       push @$recordings, {
         name => scalar fix_latin($raw->{metadata}{tags}{file_name}),
-        file => $recording->file,
+        file => $self->config('base') . $recording->file,
         mbid => $raw->{metadata}{tags}{musicbrainz_recordingid}[0],
       };
     }
