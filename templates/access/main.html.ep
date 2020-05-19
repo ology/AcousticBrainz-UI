@@ -93,7 +93,11 @@ Searching <%= $total_artists %> artists and <%= $total_recordings %> recordings
 <div>
     <ol>
     % for my $recording (sort { $a->{name} cmp $b->{name} } @$recordings) {
-        <li><%= $recording->{name} %> - <a href="https://musicbrainz.org/recording/<%= $recording->{mbid} %>"><%= $recording->{mbid} %></a></li>
+        <li>
+        <a href="/?file=<%= $recording->{file} %>"><%= $recording->{name} %></a>
+        -
+        <a href="https://musicbrainz.org/recording/<%= $recording->{mbid} %>"><%= $recording->{mbid} %></a>
+        </li>
     % }
     </ol>
 </div>

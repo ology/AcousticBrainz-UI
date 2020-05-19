@@ -1,6 +1,7 @@
 package ABUI::Controller::Access;
 use Mojo::Base 'Mojolicious::Controller';
 
+use Data::Dumper::Compact 'ddc';
 use lib $ENV{HOME} . '/sandbox/Data-Science-FromScratch/lib';
 use Data::MachineLearning::Elements;
 use File::Slurper 'read_text';
@@ -29,6 +30,7 @@ sub main {
   my $genre = $self->param('genre');
   my $average = $self->param('average');
   my $all = $self->param('all');
+  my $file = $self->param('file');
 
   my $genres;
   my $artists;
@@ -45,7 +47,12 @@ sub main {
   my $all_artists = $self->rs('Artist');
   my $all_recordings = $self->rs('Recording');
 
-  if ($artist1 && !$genre && !$average && !$all && !$artist2 && !$artist3) {
+  if ($file) {
+    my $content = read_text($file);
+    my $raw = decode_json($content);
+    return $self->render(text => ddc($raw->{metadata}));
+  }
+  elsif ($artist1 && !$genre && !$average && !$all && !$artist2 && !$artist3) {
     if ($track) {
       my $artist = $all_artists->search({ 'LOWER(name)' => lc($artist1) })->first;
       my $recs = $artist->recordings;
@@ -81,6 +88,7 @@ sub main {
 
       push @$recordings, {
         name => scalar fix_latin($raw->{metadata}{tags}{file_name}),
+        file => $file,
         mbid => $raw->{metadata}{tags}{musicbrainz_recordingid}[0],
       };
     }
