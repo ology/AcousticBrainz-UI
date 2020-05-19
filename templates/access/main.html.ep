@@ -8,39 +8,34 @@ Searching <%= $total_artists %> artists and <%= $total_recordings %> recordings
 <p></p>
 
 <div>
-    <form class="form-inline" name="myform" method="get">
-        <div class="form-group">
+    <form name="myform" method="get">
         <label for="artist1">Artist 1:</label>
-        <input type="text" class="form-control" name="artist1" id="artist1" value="<%= $artist1 %>" placeholder="Exact or partial" />
+        <input type="text" name="artist1" id="artist1" value="<%= $artist1 %>" placeholder="Exact or partial" />
         <label for="artist2">Artist 2:</label>
-        <input type="text" class="form-control" name="artist2" id="artist2" value="<%= $artist2 %>" placeholder="Similar" />
+        <input type="text" name="artist2" id="artist2" value="<%= $artist2 %>" placeholder="Similar" />
         <label for="artist3">Artist 3:</label>
-        <input type="text" class="form-control" name="artist3" id="artist3" value="<%= $artist3 %>" placeholder="Not similar" />
-        </div>
-        <div class="form-group">
+        <input type="text" name="artist3" id="artist3" value="<%= $artist3 %>" placeholder="Not similar" />
         <label for="track">Track:</label>
-        <input type="text" class="form-control" name="track" id="track" value="<%= $track %>" placeholder="Partial name" />
+        <input type="text" name="track" id="track" value="<%= $track %>" placeholder="Partial name" />
         </div>
-        <div class="form-group form-check form-check-inline">
         <label class="form-check-label" for="genre">Genre:</label>
-        <input type="checkbox" class="form-check-input" name="genre" id="genre"
+        <input type="checkbox" name="genre" id="genre"
 % if ($genre) {
             checked="checked"
 % }
         />
         <label class="form-check-label" for="average">Average:</label>
-        <input type="checkbox" class="form-check-input" name="average" id="average"
+        <input type="checkbox" name="average" id="average"
 % if ($average) {
             checked="checked"
 % }
         />
         <label class="form-check-label" for="all">All:</label>
-        <input type="checkbox" class="form-check-input" name="all" id="all"
+        <input type="checkbox" name="all" id="all"
 % if ($all) {
             checked="checked"
 % }
         />
-        </div>
         <button type="submit" class="btn btn-primary btn-sm">Submit</button>
         <button type="reset" class="btn btn-secondary btn-sm">Clear</button>
     </form>
