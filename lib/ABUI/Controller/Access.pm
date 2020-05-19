@@ -65,6 +65,7 @@ sub main {
         if ($raw->{metadata}{tags}{file_name} =~ /$track/i) {
           push @$tracks, {
             name => scalar fix_latin($raw->{metadata}{tags}{file_name}),
+            file => $file,
             mbid => $raw->{metadata}{tags}{musicbrainz_recordingid}[0],
           };
         }
