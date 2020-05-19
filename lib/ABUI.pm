@@ -18,7 +18,6 @@ sub startup {
 
   # Normal route to controller
   $r->get('/')->to('access#main');
-  $r->post('/')->to('access#action');
 }
 
 1;
