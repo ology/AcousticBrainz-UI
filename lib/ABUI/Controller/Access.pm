@@ -59,10 +59,7 @@ sub main {
       my $recs = $artist->recordings;
 
       while (my $recording = $recs->next) {
-        my $file = $self->config('base') . $recording->file;
-        my $content = read_text($file);
-        my $raw = decode_json($content);
-
+        my $raw = $recording->json($self->config('base'));
         if ($raw->{metadata}{tags}{file_name} =~ /$track/i) {
           push @$tracks, {
             name => scalar fix_latin($raw->{metadata}{tags}{file_name}),
@@ -84,10 +81,7 @@ sub main {
     my $recs = $artist->recordings;
 
     while (my $recording = $recs->next) {
-      my $file = $self->config('base') . $recording->file;
-      my $content = read_text($file);
-      my $raw = decode_json($content);
-
+      my $raw = $recording->json($self->config('base'));
       push @$recordings, {
         name => scalar fix_latin($raw->{metadata}{tags}{file_name}),
         file => $file,

@@ -1,6 +1,9 @@
 package Schema::Result::Recording;
 use parent 'DBIx::Class::Core';
 
+use File::Slurper 'read_text';
+use JSON::MaybeXS;
+
 __PACKAGE__->table('recordings');
 
 __PACKAGE__->add_columns(
@@ -16,5 +19,13 @@ __PACKAGE__->belongs_to(
     { 'foreign.id' => 'self.artist_id' },
     { cascade_delete => 0, cascade_copy => 0 }
 );
+
+sub json {
+    my $self = shift;
+    my $prefix = shift || '';
+    my $content = read_text($prefix . $self->file);
+    my $raw = decode_json($content);
+    return $raw;
+}
 
 1;
