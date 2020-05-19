@@ -18,6 +18,7 @@ sub startup {
 
   # Normal route to controller
   $r->get('/')->to('access#main');
+  $r->get('/size')->to('access#size');
 }
 
 1;

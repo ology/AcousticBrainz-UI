@@ -12,6 +12,15 @@ use Statistics::Lite 'mean';
 
 use constant BASE => '/home/guest/tmp/acousticbrainz/';
 
+sub size {
+  my $self = shift;
+
+  my $artists = $self->rs('Artist')->count;
+  my $recordings = $self->rs('Recording')->count;
+
+  $self->render(json => { artists => $artists, recordings => $recordings });
+}
+
 sub main {
   my $self = shift;
 
