@@ -55,18 +55,10 @@ sub main {
     my $raw = decode_json($content);
     $metadata = $raw->{metadata};
 
-    my $artist = $all_artists->search({ name => $artist1 })->first;
-    my $recs = $artist->recordings;
-
-    while (my $recording = $recs->next) {
-      my $raw = $recording->json($self->config('base'));
-      next unless $raw->{metadata}{tags}{file_name} eq $track;
-      push @$tracks, {
-        name => scalar fix_latin($raw->{metadata}{tags}{file_name}),
-        mbid => $raw->{metadata}{tags}{musicbrainz_recordingid}[0],
-      };
-      last;
-    }
+    push @$tracks, {
+      name => scalar fix_latin($raw->{metadata}{tags}{file_name}),
+      mbid => $raw->{metadata}{tags}{musicbrainz_recordingid}[0],
+    };
   }
   elsif ($artist1 && !$genre && !$average && !$all && !$artist2 && !$artist3) {
     if ($track) {
