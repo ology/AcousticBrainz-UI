@@ -9,7 +9,7 @@ my $db_file = '/home/gene/Data/ab-low-level.db';
 
 unlink $db_file
     if -e $db_file;
-unlink $db_file . '.journal';
+unlink $db_file . '.journal'
     if -e $db_file . '.journal';
 
 my $schema = Schema->connect('dbi:SQLite:dbname=' . $db_file, '', '');
