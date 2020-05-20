@@ -65,6 +65,7 @@ sub main {
         name => scalar fix_latin($raw->{metadata}{tags}{file_name}),
         mbid => $raw->{metadata}{tags}{musicbrainz_recordingid}[0],
       };
+      last;
     }
   }
   elsif ($artist1 && !$genre && !$average && !$all && !$artist2 && !$artist3) {
