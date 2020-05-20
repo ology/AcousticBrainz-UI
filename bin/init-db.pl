@@ -5,6 +5,11 @@ use warnings;
 use lib 'lib';
 use Schema;
 
-my $schema = Schema->connect('dbi:SQLite:dbname=/home/gene/Data/ab-low-level.db','','');
+my $db_file = '/home/gene/Data/ab-low-level.db';
+
+unlink $db_file
+    if -e $db_file;
+
+my $schema = Schema->connect('dbi:SQLite:dbname=' . $db_file, '', '');
 
 $schema->deploy({ add_drop_table => 1 });
