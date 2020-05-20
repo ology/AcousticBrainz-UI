@@ -30,7 +30,7 @@ Searching <%= $total_artists %> artists and <%= $total_recordings %> recordings
             checked="checked"
 % }
         />
-        <label class="form-check-label" for="all">All:</label>
+        <label class="form-check-label" for="all">Recordings:</label>
         <input type="checkbox" name="all" id="all"
 % if ($all) {
             checked="checked"
