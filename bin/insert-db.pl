@@ -6,6 +6,7 @@ use File::Find::Rule;
 use File::Slurper 'read_text';
 use JSON::MaybeXS;
 
+use lib 'lib';
 use Schema;
 
 my $base = '/home/guest/tmp/acousticbrainz/';
