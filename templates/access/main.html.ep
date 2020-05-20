@@ -44,7 +44,18 @@ Searching <%= $total_artists %> artists and <%= $total_recordings %> recordings
 <p></p>
 
 % if ($metadata) {
+<div>
+    <ol>
+    % for my $t (sort { $a->{name} cmp $b->{name} } @$tracks) {
+        <li>
+        <%= fix_latin($t->{name}) %>
+        (<a href="https://musicbrainz.org/recording/<%= $t->{mbid} %>" target="_blank"><%= $t->{mbid} %></a>)
+        </li>
+    % }
+    </ol>
+    <p></p>
 %= dumper $metadata
+</div>
 % }
 % elsif ($genres) {
 <div>
