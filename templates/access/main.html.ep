@@ -60,7 +60,7 @@ Searching <%= $total_artists %> artists and <%= $total_recordings %> recordings
     <ol>
     % while (my $artist = $artists->next) {
         <li>
-            <a href="/?artist1=<%= url_encode(fix_latin($artist->name)) %>&all=1"><%= fix_latin($artist->name) %></a>
+            <a href="/?artist1=<%= url_encode(fix_latin($artist->name)) %>"><%= fix_latin($artist->name) %></a>
             (<a href="https://musicbrainz.org/artist/<%= $artist->mbid %>"><%= $artist->mbid %></a>)
         </li>
     % }
