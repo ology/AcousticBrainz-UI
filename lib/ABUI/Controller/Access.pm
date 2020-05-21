@@ -54,6 +54,7 @@ sub main {
   if ($file) {
     my $content = read_text($file);
     my $raw = decode_json($content);
+    $metadata = $raw->{metadata};
 
     push @$tracks, {
       name => scalar fix_latin($raw->{metadata}{tags}{file_name}),
