@@ -146,12 +146,12 @@ sub main {
     $members->{Shared} = [ $s1->intersection($s2)->members ];
   }
   elsif ($artist1 && $average) {
-    $averages = $self->_compute_averages($artist1, $track);
+    $averages = $self->_compute_averages($artist1, $type, $track);
   }
   elsif ($artist1 && $artist2 && $artist3) {
-    my $averages1 = $self->_compute_averages($artist1);
-    my $averages2 = $self->_compute_averages($artist2);
-    my $averages3 = $self->_compute_averages($artist3);
+    my $averages1 = $self->_compute_averages($artist1, $type);
+    my $averages2 = $self->_compute_averages($artist2, $type);
+    my $averages3 = $self->_compute_averages($artist3, $type);
 
     my %features1;
     my %features2;
@@ -270,7 +270,7 @@ sub main {
 }
 
 sub _compute_averages {
-  my ($self, $who, $track) = @_;
+  my ($self, $who, $type, $track) = @_;
 
   my $artist = $self->rs('Artist')->search({ 'LOWER(name)' => lc($who) })->first;
   my $recs = $artist->recordings;
@@ -294,7 +294,7 @@ sub _compute_averages {
 
     my $track_name = $raw->{metadata}{tags}{file_name};
 
-    next if $track_name !~ /\.mp3$/; # Only consider MP3 files
+    next if $type && $track_name !~ /\.$type$/;
     next if $track_name && $track_name !~ /$track/i;
 
     next if $seen{ $raw->{metadata}{tags}{musicbrainz_recordingid}[0] }++;
