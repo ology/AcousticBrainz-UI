@@ -90,6 +90,7 @@ sub main {
 
     while (my $recording = $recs->next) {
       my $raw = $recording->json($self->config('base'));
+      next if $type && $raw->{metadata}{tags}{file_name} !~ /\.$type$/;
       push @$recordings, {
         name => scalar fix_latin($raw->{metadata}{tags}{file_name}),
         file => $self->config('base') . $recording->file,
