@@ -38,6 +38,7 @@ Searching <%= $total_artists %> artists and <%= $total_recordings %> recordings
         />
         <label for="type">Type:</label>
         <select name="type" id="type">
+            <option value="">Optional...</option>
             <option value="flac">FLAC</option>
             <option value="mp3">MP3</option>
             <option value="ogg">OGG</option>
