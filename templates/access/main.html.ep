@@ -39,9 +39,21 @@ Searching <%= $total_artists %> artists and <%= $total_recordings %> recordings
         <label for="type">Type:</label>
         <select name="type" id="type">
             <option value="">Optional...</option>
-            <option value="flac">FLAC</option>
-            <option value="mp3">MP3</option>
-            <option value="ogg">OGG</option>
+            <option value="flac"
+% if ($type eq 'flac') {
+                checked="checked"
+% }
+>FLAC</option>
+            <option value="mp3"
+% if ($type eq 'mp3') {
+                checked="checked"
+% }
+>MP3</option>
+            <option value="ogg"
+% if ($type eq 'ogg') {
+                checked="checked"
+% }
+>OGG</option>
         </select>
         <button type="submit" class="btn btn-primary btn-sm">Submit</button>
         <button type="reset" class="btn btn-secondary btn-sm">Clear</button>
