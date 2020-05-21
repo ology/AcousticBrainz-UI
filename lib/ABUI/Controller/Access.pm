@@ -244,6 +244,7 @@ sub main {
   }
 
   $self->render(
+    type             => $type,
     metadata         => $metadata,
     artist1          => $artist1,
     artist2          => $artist2,
