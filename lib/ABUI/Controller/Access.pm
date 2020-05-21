@@ -33,6 +33,7 @@ sub main {
   my $average = $self->param('average');
   my $all = $self->param('all');
   my $file = url_unescape $self->param('file');
+  my $type = $self->param('type');
 
   my $genres;
   my $artists;
