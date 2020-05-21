@@ -294,7 +294,7 @@ sub _compute_averages {
     next if $track_name !~ /\.mp3$/; # Only consider MP3 files
     next if $track_name && $track_name !~ /$track/i;
 
-    next if $seen{ $raw->{metadata}{tags}{musicbrainz_recordingid}[0] }++;
+    next unless $seen{ $raw->{metadata}{tags}{musicbrainz_recordingid}[0] }++;
 
     push @{ $avg{length} }, $raw->{metadata}{audio_properties}{length};
 
