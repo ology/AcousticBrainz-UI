@@ -144,7 +144,7 @@ sub main {
     $members->{Shared} = [ $s1->intersection($s2)->members ];
   }
   elsif ($artist1 && $average) {
-    $averages = $self->_compute_averages($artist1);
+    $averages = $self->_compute_averages($artist1, $track);
   }
   elsif ($artist1 && $artist2 && $artist3) {
     my $averages1 = $self->_compute_averages($artist1);
@@ -267,7 +267,7 @@ sub main {
 }
 
 sub _compute_averages {
-  my ($self, $who) = @_;
+  my ($self, $who, $track) = @_;
 
   my $artist = $self->rs('Artist')->search({ 'LOWER(name)' => lc($who) })->first;
   my $recs = $artist->recordings;
@@ -289,10 +289,12 @@ sub _compute_averages {
     my $content = read_text($self->config('base') . $recording->file);
     my $raw = decode_json($content);
 
-    next unless $seen{ $raw->{metadata}{tags}{musicbrainz_recordingid}[0] }++;
-
     my $track_name = $raw->{metadata}{tags}{file_name};
-    next unless $track_name =~ /\.mp3$/; # Only consider MP3 files
+
+    next if $track_name !~ /\.mp3$/; # Only consider MP3 files
+    next if $track_name && $track_name !~ /$track/i;
+
+    next if $seen{ $raw->{metadata}{tags}{musicbrainz_recordingid}[0] }++;
 
     push @{ $avg{length} }, $raw->{metadata}{audio_properties}{length};
 
