@@ -41,17 +41,17 @@ Searching <%= $total_artists %> artists and <%= $total_recordings %> recordings
             <option value="">Optional...</option>
             <option value="flac"
 % if ($type eq 'flac') {
-                checked="checked"
+                selected="selected"
 % }
 >FLAC</option>
             <option value="mp3"
 % if ($type eq 'mp3') {
-                checked="checked"
+                selected="selected"
 % }
 >MP3</option>
             <option value="ogg"
 % if ($type eq 'ogg') {
-                checked="checked"
+                selected="selected"
 % }
 >OGG</option>
         </select>
