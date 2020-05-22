@@ -13,4 +13,4 @@ my $artists = $schema->resultset('Artist')->count;
 my $recordings = $schema->resultset('Recording')->count;
 my $db_size = -s $db_file;
 
-return "{ artists => $artists, recordings => $recordings, db_size => $db_size }\n";
+print "{ artists => $artists, recordings => $recordings, db_size => $db_size }\n";
