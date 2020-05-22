@@ -289,8 +289,6 @@ sub _compute_averages {
   my %avg;
   my %seen;
 
-  my $ml = Data::MachineLearning::Elements->new;
-
   while (my $recording = $recs->next) {
     my $content = read_text($self->config('base') . $recording->file);
     my $raw = decode_json($content);
@@ -330,7 +328,7 @@ sub _compute_averages {
     }
   }
 
-  %avg = map { $_ => mean(@{ $ml->de_mean(@{ $avg{$_} }) }) } keys %avg;
+  %avg = map { $_ => mean(@{ $avg{$_} }) } keys %avg;
 
   return \%avg;
 }
