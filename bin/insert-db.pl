@@ -30,7 +30,7 @@ my $schema = Schema->connect('dbi:SQLite:dbname=/home/gene/Data/ab-low-level.db'
 my %name_ids;
 
 print "Parsing JSON...\n";
-my $i = 0;
+#my $i = 0;
 for my $file (@files) {
     my $content = read_text($file);
     my $raw = decode_json($content);
@@ -45,8 +45,8 @@ for my $file (@files) {
     }
     my $artist_id = $name_ids{$artist_name};
 
-    $i++;
-    warn("\t$i. $artist_name ($artist_id)\n");
+#    $i++;
+#    warn("\t$i. $artist_name ($artist_id)\n");
 
     $file =~ s|^$base||;
 
