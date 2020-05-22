@@ -18,7 +18,7 @@ print "Gathering files...\n";
 my @files;
 my $files_dat = 'ab-files.dat';
 if (-e $files_dat) {
-    @files = [ retrieve $files_dat ];
+    @files = @{ retrieve $files_dat };
 }
 else {
     @files = File::Find::Rule->file()->name('*.json')->in($path);
