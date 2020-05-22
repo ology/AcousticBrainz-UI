@@ -293,7 +293,7 @@ sub _compute_averages {
     my $content = read_text($self->config('base') . $recording->file);
     my $raw = decode_json($content);
 
-    my $track_name = $raw->{metadata}{tags}{file_name};
+    my $track_name = $raw->{metadata}{tags}{file_name} || '';
 
     next if $type && $track_name !~ /\.$type$/;
     next if $track_name && $track_name !~ /$track/i;
