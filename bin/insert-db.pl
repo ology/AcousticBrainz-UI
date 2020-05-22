@@ -14,13 +14,13 @@ my $base = '/home/guest/tmp/acousticbrainz/';
 
 my $path = shift || $base . 'acousticbrainz-lowlevel-json-20150129/lowlevel';
 
+print "Gathering files...\n";
 my @files;
 my $files_dat = 'ab-files.dat';
 if (-e $files_dat) {
     @files = [ retrieve $files_dat ];
 }
 else {
-    print "Gathering files...\n";
     @files = File::Find::Rule->file()->name('*.json')->in($path);
     store \@files, $files_dat;
 }
