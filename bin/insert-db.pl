@@ -38,7 +38,7 @@ for my $file (@files) {
     my $artist_name = $raw->{metadata}{tags}{artist}[0] || $raw->{metadata}{tags}{albumartist}[0];
     next unless $artist_name;
 
-    unless ($name_ids{$artist_name}) {
+    unless (exists $name_ids{$artist_name}) {
         my $artist = $schema->resultset('Artist')->create({
             name => $artist_name,
             mbid => $raw->{metadata}{tags}{musicbrainz_artistid}[0],
