@@ -39,16 +39,20 @@ for my $file (@files) {
     next unless $artist_name;
 
     unless ($name_ids{$artist_name}) {
-        my $artist_mbid = $raw->{metadata}{tags}{musicbrainz_artistid}[0];
-        my $artist = $schema->resultset('Artist')->create({ name => $artist_name, mbid => $artist_mbid });
+        my $artist = $schema->resultset('Artist')->create({
+            name => $artist_name,
+            mbid => $raw->{metadata}{tags}{musicbrainz_artistid}[0],
+        });
         $name_ids{$artist_name} = $artist->id;
     }
-    my $artist_id = $name_ids{$artist_name};
 
 #    $i++;
 #    warn("\t$i. $artist_name ($artist_id)\n");
 
     $file =~ s|^$base||;
 
-    $schema->resultset('Recording')->create({ artist_id => $artist_id, file => $file });
+    $schema->resultset('Recording')->create({
+        artist_id => $name_ids{$artist_name},
+        file      => $file,
+    });
 }
