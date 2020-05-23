@@ -18,7 +18,7 @@ for my $i (1 .. 2) {
     my $recordings = $schema->resultset('Recording')->count;
     my $db_size = -s $db_file;
 
-    printf "Artists: %s; Recordings: %s; DB_size: %s; Time: %s\n",
+    printf "Artists: %s; Recordings: %s; DB size: %s; Time: %s\n",
         $nf->format_number($artists),
         $nf->format_number($recordings),
         $nf->format_number($db_size),
