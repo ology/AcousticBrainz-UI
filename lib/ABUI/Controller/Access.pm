@@ -79,9 +79,15 @@ sub main {
     my $artist = $all_artists->search({ 'LOWER(name)' => lc($artist1) })->first;
     my $recs = $artist->recordings;
 
+    my %seen;
+
     while (my $recording = $recs->next) {
+      next unless $seen{ $recording->mbid_from_file }++;
+
       my $raw = $recording->json($self->config('base'));
+
       next if $type && $raw->{metadata}{tags}{file_name} !~ /\.$type$/;
+
       push @$recordings, {
         name => scalar fix_latin($raw->{metadata}{tags}{file_name}),
         file => $self->config('base') . $recording->file,
