@@ -8,6 +8,7 @@ use File::Slurper 'read_text';
 use Encoding::FixLatin 'fix_latin';
 use HTTP::Simple;
 use JSON::MaybeXS;
+use Number::Format;
 use Set::Tiny;
 use Statistics::Lite 'mean';
 
@@ -234,6 +235,8 @@ sub main {
     }
   }
 
+  my $nf = Number::Format->new;
+
   $self->render(
     type             => $type,
     metadata         => $metadata,
@@ -254,8 +257,8 @@ sub main {
     members          => $members,
     union            => $union,
     intersection     => $intersection,
-    total_artists    => $all_artists->count,
-    total_recordings => $all_recordings->count,
+    total_artists    => $nf->format_number($all_artists->count),
+    total_recordings => $nf->format_number($all_recordings->count),
   );
 }
 
