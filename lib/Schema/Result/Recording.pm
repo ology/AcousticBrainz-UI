@@ -32,7 +32,7 @@ sub json {
 sub mbid_from_file {
     my $self = shift;
     my $mbid = basename($self->file, '.json');
-    $mbid =~ s/^(.+?)-\d+\.json$/$1/;
+    $mbid =~ s/^(.+?)-\d+$/$1/;
     return $mbid;
 }
 
