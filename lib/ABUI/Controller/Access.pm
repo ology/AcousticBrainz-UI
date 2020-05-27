@@ -82,7 +82,7 @@ sub main {
     my %seen;
 
     while (my $recording = $recs->next) {
-      next unless $seen{ $recording->mbid_from_file }++;
+      next if $seen{ $recording->mbid_from_file }++;
 
       my $raw = $recording->json($self->config('base'));
 
