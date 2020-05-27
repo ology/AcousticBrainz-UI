@@ -1,6 +1,7 @@
 package Schema::Result::Recording;
 use parent 'DBIx::Class::Core';
 
+use File::Basename;
 use File::Slurper 'read_text';
 use JSON::MaybeXS;
 
@@ -26,6 +27,13 @@ sub json {
     my $content = read_text($prefix . $self->file);
     my $raw = decode_json($content);
     return $raw;
+}
+
+sub mbid_from_file {
+    my $self = shift;
+    my $mbid = basename($self->file, '.json');
+    $mbid =~ s/^(.+?)-\d+\.json$/$1/;
+    return $mbid;
 }
 
 1;
