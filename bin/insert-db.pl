@@ -14,6 +14,8 @@ my $path = shift || die "Usage: perl $0 /feature-extraction/some-tune.json\n";
 
 my $db_file = 'abui.db';
 
+my $base = $ENV{HOME} . '/Data/';
+
 print "Gathering files...\n";
 my $files;
 my $files_dat = 'ab-files.dat';
