@@ -10,9 +10,11 @@ use Storable;
 use lib 'lib';
 use Schema;
 
-my $base = '/home/guest/tmp/acousticbrainz/';
+my $base = $ENV{HOME} . '/tmp/acousticbrainz/';
 
 my $path = shift || $base . 'acousticbrainz-lowlevel-json-20150129/lowlevel';
+
+my $db_file = $ENV{HOME} . '/Data/ab-low-level.db';
 
 print "Gathering files...\n";
 my $files;
@@ -25,7 +27,7 @@ else {
     store $files, $files_dat;
 }
 
-my $schema = Schema->connect('dbi:SQLite:dbname=/home/gene/Data/ab-low-level.db', '', '');
+my $schema = Schema->connect("dbi:SQLite:dbname=$db_file", '', '');
 
 my %name_ids;
 
