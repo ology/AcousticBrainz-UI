@@ -10,11 +10,9 @@ use Storable;
 use lib 'lib';
 use Schema;
 
-my $path = shift || die "Usage: perl $0 /feature-extraction/some-tune.json\n";
+my $path = $ENV{HOME} . '/Data/';
 
 my $db_file = 'abui.db';
-
-my $base = $ENV{HOME} . '/Data/';
 
 print "Gathering files...\n";
 my $files;
@@ -51,7 +49,7 @@ for my $file (@$files) {
 #    $i++;
 #    warn("\t$i. $artist_name ($artist_id)\n");
 
-    $file =~ s|^$base||;
+    $file =~ s|^$path||;
 
     $schema->resultset('Recording')->create({
         artist_id => $name_ids{$artist_name},
