@@ -5,7 +5,7 @@ use warnings;
 use lib 'lib';
 use Schema;
 
-my $db_file = '/home/gene/Data/ab-low-level.db';
+my $db_file = $ENV{HOME} . '/Data/ab-low-level.db';
 
 unlink $db_file
     if -e $db_file;
