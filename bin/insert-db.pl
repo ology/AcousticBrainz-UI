@@ -10,11 +10,9 @@ use Storable;
 use lib 'lib';
 use Schema;
 
-my $base = $ENV{HOME} . '/tmp/acousticbrainz/';
+my $path = shift || die "Usage: perl $0 /feature-extraction/some-tune.json\n";
 
-my $path = shift || $base . 'acousticbrainz-lowlevel-json-20150129/lowlevel';
-
-my $db_file = $ENV{HOME} . '/Data/ab-low-level.db';
+my $db_file = 'abui.db';
 
 print "Gathering files...\n";
 my $files;
