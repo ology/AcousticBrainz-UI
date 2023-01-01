@@ -7,7 +7,7 @@ use Number::Format;
 use lib 'lib';
 use Schema;
 
-my $db_file = $ENV{HOME} . '/Data/ab-low-level.db';
+my $db_file = 'abui.db';
 
 my $schema = Schema->connect('dbi:SQLite:dbname=' . $db_file, '', '');
 
